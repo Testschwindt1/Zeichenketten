@@ -1,7 +1,7 @@
 #include <iostream>
-#include <string.h> //für strlen
-#include <stdio.h> //für getchar
-#include <math.h> //für pow
+#include <string.h> //fÃ¼r strlen
+#include <stdio.h> //fÃ¼r getchar
+#include <math.h> //fÃ¼r pow
 
 using namespace std;
 
@@ -23,7 +23,7 @@ float ctf(char str[]){
     }
     c = str[i]-'0';
     x = x + c;                                                                              cout<<"  i: "<<i<<"\t\tc: "<<c<<"\t\tx: "<<x<<endl;
-    i=i+2; //Komma überspringen
+    i=i+2; //Komma Ã¼berspringen
     while(len>=i) {
         c = str[len]-'0';
         y = (y + c)/10;                                                                     cout<<"len: "<<len<<"\t\tc: "<<c<<"\t\ty: "<<y<<endl;
