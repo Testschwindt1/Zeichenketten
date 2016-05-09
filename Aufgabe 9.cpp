@@ -3,7 +3,7 @@
 #include <stdio.h> //für getchar
 #include <math.h> //für pow
 
-using namespace std;
+using namespace std; 
 
 int powa(int b, int p) {
     int erg = 1;
