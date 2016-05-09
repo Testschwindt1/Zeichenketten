@@ -1,7 +1,7 @@
 #include <iostream>
-#include <string.h> //fÃ¼r strlen
-#include <stdio.h> //fÃ¼r getchar
-#include <math.h> //fÃ¼r pow
+#include <string.h> //für strlen
+#include <stdio.h> //für getchar
+#include <math.h> //für pow
 
 using namespace std;
 
@@ -13,36 +13,38 @@ int powa(int b, int p) {
     return erg;
 }
 
-int cti(char str[]){
-    int i = 0; int x = 0; int c;
-                                                                                                    //cout<<endl<<"Variante 1"<<endl<<"i: -"<<"\t\tc: -"<<"\t\tx: "<<x<<endl;
-    while(i<strlen(str)-1) {
+float ctf(char str[]){
+    int i = 0; int len = strlen(str)-1; float x = 0.0; float y = 0.0; int c;
+                                                                                            cout<<endl<<"Variante 1"<<endl<<"  i: -"<<"\t\tc: -"<<"\t\tx: "<<x<<endl;
+    while(!(str[i+1] == '.' xor str[i+1] == ',')) {
         c = str[i]-'0';
-        x = (x + c)*10;                                                                             //cout<<"i: "<<i<<"\t\tc: "<<c<<"\t\tx: "<<x<<endl;
+        x = (x + c)*10;                                                                     cout<<"  i: "<<i<<"\t\tc: "<<c<<"\t\tx: "<<x<<endl;
         i++;
     }
     c = str[i]-'0';
-    x = x + c;                                                                                      //cout<<"i: "<<i<<"\t\tc: "<<c<<"\t\tx: "<<x<<endl;
-    return x;
+    x = x + c;                                                                              cout<<"  i: "<<i<<"\t\tc: "<<c<<"\t\tx: "<<x<<endl;
+    i=i+2; //Komma überspringen
+    while(len>=i) {
+        c = str[len]-'0';
+        y = (y + c)/10;                                                                     cout<<"len: "<<len<<"\t\tc: "<<c<<"\t\ty: "<<y<<endl;
+        len--;
+    }                                                                                       cout<<">> x: "<<x<<" -> y: "<<y<<" -> = "<<x+y<<endl;
+    return x+y;
 }
 
-int ctii(char str[]){
-    int len = strlen(str)-1; int x = 0; int i = 0; int c;
-                                                                                                    cout<<endl<<endl<<"Variante 2"<<endl<<"i: -"<<"\t\tlen: "<<len<<"\t\tc: -"<<"\t\tx: "<<x<<endl;
-    while(len>=0) {
-        c = str[i]-'0';
-        /*****************************************************************************************
-        *** die untere MÃ¶glichkeit funktioniert, allerdings macht die Rundung bei pow Probleme ***
-        ******** unter anderem bei 3-, 5-, 8-, 9- & 10-stelligen Zahlen. Warum auch immer ********
-        ******************************************************************************************
-        if (len == 2) {
-            x = x + c*100;
+float ctff(char str[]){
+    int p = 0; float x = 0.0; int i = 0; int c;
+    while(!(str[p+1] == '.' xor str[p+1] == ',')){
+        p++;
+    }                                                                                       cout<<endl<<"Variante 2"<<endl<<"  i: -"<<"\t\tp: "<<p<<"\t\tc: -"<<"\t\tx: "<<x<<endl;
+    while(i<strlen(str)) {
+        if (str[i] == '.' || str[i] == ',') {
+            i++;
         }
-        else {x = x + (c*(pow(10,len)));}
-        ******************************************************************************************/
-        x = x + (c*(powa(10,len)));                                                                  cout<<"i: "<<i<<"\t\tlen: "<<len<<"\t\tc: "<<c<<"\t\tx: "<<x<<endl;
+        c = str[i]-'0';
+        x = x + (c*(powa(10,p)));                                                            cout<<"  i: "<<i<<"\t\tp: "<<p<<"\t\tc: "<<c<<"\t\tx: "<<x<<endl;
         i++;
-        len--;
+        p--;
     }
     return x;
 }
@@ -51,46 +53,52 @@ int ctii(char str[]){
 
 int main()
 {
-    char str8[50], c;
-    int i, cti1, cti2;
+    char str9[101], c;
+    int i, k;
+    float ctf1, ctf2;
     bool boo;
 
-    cout<<"Fehler in Ganzzahleingabe erkennen"<<endl<<endl;
-
+    cout<<"Fehler in Gleitkommazahleingabe erkennen"<<endl<<endl;
     do{
         boo = true;
 
-        cout<<"Geben Sie eine Ganzzahl ein: ";
-        for(int f=0; f<50; f++){
+        cout<<"Geben Sie eine Gleitkommazahl ein: ";
+        for(int f=0; f<101; f++){
             c = getchar();
             if(c=='\n'){
-                str8[f] = '\0'; break;
+                str9[f] = '\0'; break;
             }
-            str8[f] = c;
+            str9[f] = c;
         }
 
-        if (strlen(str8) == 0) {
+        if (strlen(str9) == 0) {
             boo = false;
         }
-        else{
-            i = 0;
-            while (i < strlen(str8)) {
-                c = str8[i];
-                if (!(c >= '0' && c <= '9')) {
+        else {
+            i = 0; k = 0;
+            while (i < strlen(str9)) {
+                c = str9[i];
+                if (!((c >= '0' && c <= '9') || c == '.' || c == ',')) {
                     boo = false; break;
                 }
+                if (c == '.' || c == ',') {
+                    k++;
+                }
                 i++;
+            }
+            if (k!=1 || str9[0] == '.' || str9[0] == ',') {
+                boo = false;
             }
         }
 
         cout<<endl<<endl<<"Ihre Eingabe lautete: ";
         if (boo == true) {
-            cti1 = cti(str8);
-            cti2 = ctii(str8);
-            cout<<endl<<"> Variante 1 (hinten beginnend) <"<<endl<<cti1<<endl<<"> Variante 2 ( vorne beginnend) <"<<endl<<cti2<<endl;
+            ctf1 = ctf(str9);
+            ctf2 = ctff(str9);
+            cout<<endl<<"> Variante 1 (hinten beginnend) <"<<endl<<ctf1<<endl<<"> Variante 2 ( vorne beginnend) <"<<endl<<ctf2<<endl;
         }
         else {
-            cout<<str8<<endl<<"Dies ist keine Ganzzahl."<<endl<<"Bitte versuchen Sie es erneut."<<endl<<endl<<endl<<endl;
+            cout<<str9<<endl<<"Dies ist keine gueltige Gleitkommazahl."<<endl<<"Bitte versuchen Sie es erneut."<<endl<<endl<<endl<<endl;
         }
     }while(boo == false);
 }
