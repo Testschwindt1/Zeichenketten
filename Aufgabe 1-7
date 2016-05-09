@@ -4,7 +4,7 @@
 #include <limits.h>
 #include <math.h>
 
-using namespace std;
+using namespace std; /*Hallo, hallo, 1, 2, 3 - jetzt sind wir alle mit dabei!!*/
 
 int main()
 {
