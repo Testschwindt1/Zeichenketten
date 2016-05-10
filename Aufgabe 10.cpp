@@ -4,6 +4,7 @@
 #include <math.h> //für pow
 
 using namespace std;
+/* dann fügen wir hier doch mal einen unlustigen Kommentar ein. */
 
 int countdigits(int x)
 {
@@ -16,7 +17,7 @@ int countdigits(int x)
 
     return count;
 }
-
+/* har har, haben wir gelacht... :-| */
 int powa(int b, int p) {
     int erg = 1;
     for (p; p>0; p--) {
