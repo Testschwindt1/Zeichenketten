@@ -2,7 +2,7 @@
 #include <string.h> //für strlen
 #include <stdio.h> //für getchar
 #include <math.h> //für pow
-
+/*lalala*/
 using namespace std;
 
 int powa(int b, int p) {
